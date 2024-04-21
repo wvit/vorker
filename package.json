@@ -1,0 +1,35 @@
+{
+  "name": "@vorker/monorepo",
+  "type": "module",
+  "description": "v-worker （个人项目或日常工作集成的工具类）",
+  "main": "index.js",
+  "scripts": {
+    "doc": "typedoc --options typedoc.mjs",
+    "build": "pnpm -r --filter='./packages/*' run build",
+    "pub:idb": "pnpm --filter idb run pub",
+    "pub:utils": "pnpm --filter utils run pub",
+    "build:watch": "pnpm -r --filter='./packages/*' run build:watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wvit/vorker.git"
+  },
+  "keywords": [
+    "utils、indexedDB、tools"
+  ],
+  "author": "wv",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/wvit/vorker/issues"
+  },
+  "homepage": "https://github.com/wvit/vorker#readme",
+  "dependencies": {},
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^25.0.7",
+    "@rollup/plugin-node-resolve": "^15.2.3",
+    "@rollup/plugin-typescript": "^11.1.6",
+    "rollup": "^4.13.2",
+    "tslib": "^2.6.2",
+    "typedoc": "^0.25.13"
+  }
+}
