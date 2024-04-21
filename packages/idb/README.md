@@ -1,8 +1,8 @@
 ## 开箱即用 IndexedDB 增删改查方法
 
-[查看文档](https://wvit.github.io/IDB/)
+[查看文档](https://wvit.github.io/vorker/modules/_vorker_idb.html)
 
-[查看主页](https://github.com/wvit/IDB)
+[查看源码](https://github.com/wvit/vorker/tree/main/packages/idb)
 
 [下载](https://www.npmjs.com/package/@vorker/idb)
 
