@@ -6,9 +6,9 @@
   "scripts": {
     "doc": "typedoc --options typedoc.mjs",
     "build": "pnpm -r --filter='./packages/*' run build",
+    "build:watch": "pnpm -r --filter='./packages/*' run build:watch",
     "pub:idb": "pnpm --filter idb run pub",
-    "pub:utils": "pnpm --filter utils run pub",
-    "build:watch": "pnpm -r --filter='./packages/*' run build:watch"
+    "pub:utils": "pnpm --filter utils run pub"
   },
   "repository": {
     "type": "git",

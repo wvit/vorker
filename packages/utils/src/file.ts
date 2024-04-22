@@ -1,5 +1,25 @@
 import { dom } from './dom'
 
+const textEncoder = new TextEncoder()
+
+/** 
+ * 获取内容占用磁盘空间大小
+ * 
+ * @param content - 需要获取字节大小的文本内容
+ * 
+ * @returns 返回以 MB 为单位的数字
+ * 
+ * @example
+ * ```
+ * console.log(`${getStorageSize('hello')} MB`)
+ * ```
+ */
+export const getStorageSize = (content: string) => {
+  const dataEncode = textEncoder.encode(content)
+  const storageSize = Number((dataEncode.length / 1024 / 1024).toFixed(2))
+  return storageSize
+}
+
 /**
  * 将文件转为 base64
  *
@@ -14,7 +34,7 @@ import { dom } from './dom'
  * const imgBlob = await fetch('/test.png').then(res => res.blob())
  * // 获取 json 文件的 blob
  * const jsonBlob = await fetch('/test.json').then(res => res.blob())
- * 
+ *
  * // 获取图片的base64
  * const imgBase64 = await getBase64(imgBlob)
  * // 获取 json 文件内容
