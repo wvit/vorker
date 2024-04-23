@@ -1,0 +1,33 @@
+{
+  "name": "@vorker/chrome",
+  "version": "0.0.2",
+  "description": "",
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
+  },
+  "main": "dist/lib/index.js",
+  "module": "dist/es/index.js",
+  "scripts": {
+    "pub": "npm run build && npm version patch && npm pub",
+    "build": "rollup --config",
+    "build:watch": "rollup --config --watch"
+  },
+  "author": "wv",
+  "license": "ISC",
+  "types": "./dist/lib/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wvit/vtils.git"
+  },
+  "keywords": [
+    "utils"
+  ],
+  "bugs": {
+    "url": "https://github.com/wvit/vtils/issues"
+  },
+  "homepage": "https://wvit.github.io/vtils/",
+  "devDependencies": {
+    "@types/chrome": "^0.0.266"
+  },
+  "dependencies": {}
+}
