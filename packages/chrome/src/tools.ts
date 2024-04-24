@@ -21,38 +21,6 @@ export const local = {
 export const getResource = (path: string) => chrome.runtime.getURL(path)
 
 /**
- * 初始化国际化字段
- *
- * @param locales - 国际化字段配置
- *
- * @returns 返回一个获取国际化字段的方法
- *
- * @example
- * ```
- * const getI18n = initI18n({ '你好': 'hello' })
- * // 获取 “你好” 字段的国际化
- * getI18n('你好')
- * ```
- */
-export const initI18n = <
-  T extends Record<string, string | Record<string, string>>
->(
-  locales: T
-) => {
-  return (key: keyof T) => {
-    let fieldName = locales[key] as string
-
-    if (typeof fieldName === 'string') {
-      fieldName = fieldName.replace(/\s/g, '_').replace(/[^a-zA-Z0-9_]/g, '')
-    } else {
-      fieldName = key as string
-    }
-
-    return chrome.i18n.getMessage(fieldName)
-  }
-}
-
-/**
  * 凡是没有提供 Promise 的 chrome api 都需要这个方法来捕获 chrome.runtime.lastError 报错。
  *
  * @param api - 需要执行的 api 方法
