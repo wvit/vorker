@@ -7,6 +7,9 @@
     "doc": "typedoc --options typedoc.mjs",
     "build": "pnpm -r --filter='./packages/*' run build",
     "build:watch": "pnpm -r --filter='./packages/*' run build:watch",
+    "build:idb": "pnpm --filter idb run build:watch",
+    "build:utils": "pnpm --filter utils run build:watch",
+    "build:chrome": "pnpm --filter chrome run build:watch",
     "pub:idb": "pnpm --filter idb run pub",
     "pub:utils": "pnpm --filter utils run pub",
     "pub:chrome": "pnpm --filter chrome run pub"
