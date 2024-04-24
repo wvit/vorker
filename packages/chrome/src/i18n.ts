@@ -69,4 +69,44 @@ export const i18n = {
 
     return localeData
   },
+
+  /**
+   * vite-plugin，方便生成 chrome 扩展使用的国际化配置
+   *
+   * @param locales - 国际化字段配置
+   * @param callback - 生成每种语言时触发的回调函数
+   *
+   * @returns 返回一个提供给 vite-plugin 的配置对象
+   *
+   * @example
+   * ```
+   * // vite 配置
+   * export default defineConfig({
+   *   plugins: [
+   *     i18n.generateLocales(locales, (key, content) => {
+   *       try {
+   *         fs.writeFileSync(`public/_locales/${key}/messages.json`, content)
+   *         fs.writeFileSync(`dist/_locales/${key}/messages.json`, content)
+   *       } catch {}
+   *     }),
+   *   ],
+   * })
+   * ```
+   */
+  generateLocales: (
+    locales: LocalesType,
+    callback: (localeKey: string, content: string) => void
+  ) => {
+    return {
+      name: 'generate-chrome-locales',
+      buildStart() {
+        const localeData = i18n.transfromLocales(locales)
+
+        Object.keys(localeData).forEach(key => {
+          const content = JSON.stringify(localeData[key], null, 2)
+          callback(key, content)
+        })
+      },
+    }
+  },
 }
