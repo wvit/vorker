@@ -7,20 +7,22 @@
  *
  * @example
  * ```
+ * // 定义枚举值
+ * enum Action {
+ *   GetData = 'getData',
+ * }
  * // 消息管理器
  * const Message = registerMessage([
  *  {
  *     name: 'background',
  *     type: 'normal',
- *     action: 'getData',
+ *     action: Action,
  *   },
  * ])
- *
  * // 向 background 中发送 message
- * Message.background.send('getData')
- *
+ * Message.background.send(Action.GetData)
  * // 监听 background 的相关 message 事件
- * Message.background.on('getData', () => {})
+ * Message.background.on(Action.GetData, () => {})
  * ```
  */
 export const registerMessage = <
@@ -35,7 +37,10 @@ export const registerMessage = <
     return { ...prev, [name]: messageHandleMap()[type] }
   }, {})
 
-  return messageEventMap as Record<T, ReturnType<typeof messageHandleMap<K>>[U]>
+  return messageEventMap as Record<
+    T,
+    ReturnType<typeof messageHandleMap<K[keyof K]>>[U]
+  >
 }
 
 /** 不同类型 message 事件执行的方法 */
