@@ -1,3 +1,9 @@
+/** 从联合类型中，找到匹配的类型，并获取其属性类型 */
+type FindItem<T, K, U extends keyof Extract<T, { name: K }>> = Extract<
+  T,
+  { name: K }
+>[U]
+
 /**
  * 注册消息事件
  *
@@ -26,21 +32,26 @@
  * ```
  */
 export const registerMessage = <
-  T extends string,
-  U extends keyof ReturnType<typeof messageHandleMap>,
-  K
+  T extends {
+    name: string
+    type: keyof ReturnType<typeof messageHandleMap>
+    action: Record<string, string | number>
+  }
 >(
-  messages: { name: T; type: U; action: K }[]
+  messages: T[]
 ) => {
   const messageEventMap = messages?.reduce((prev, item) => {
     const { name, type } = item
     return { ...prev, [name]: messageHandleMap()[type] }
   }, {})
 
-  return messageEventMap as Record<
-    T,
-    ReturnType<typeof messageHandleMap<K[keyof K]>>[U]
-  >
+  return messageEventMap as {
+    [K in T['name']]: ReturnType<
+      typeof messageHandleMap<
+        FindItem<T, K, 'action'>[keyof FindItem<T, K, 'action'>]
+      >
+    >[FindItem<T, K, 'type'>]
+  }
 }
 
 /** 不同类型 message 事件执行的方法 */
