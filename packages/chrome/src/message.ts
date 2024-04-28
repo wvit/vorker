@@ -59,7 +59,7 @@ const messageHandleMap = <T>() => ({
   /** 向 background 或 action 环境发送或监听的 message 事件 */
   normal: {
     send: (action: T, message?: any) => {
-      return chrome.runtime.sendMessage({ action, ...message })
+      return chrome.runtime.sendMessage({ ...message, action })
     },
 
     on: (
@@ -83,7 +83,7 @@ const messageHandleMap = <T>() => ({
   /** 向 content 环境或其他标签页发送或监听 message 事件 */
   tabs: {
     send: (tabId: number, action: T, message?: any) => {
-      return chrome.tabs.sendMessage(tabId, { action, ...message })
+      return chrome.tabs.sendMessage(tabId, { ...message, action })
     },
 
     activeSend: async (action: T, message?: any) => {
@@ -95,7 +95,7 @@ const messageHandleMap = <T>() => ({
       )[0]
 
       if (activeTab) {
-        return chrome.tabs.sendMessage(activeTab.id!, { action, ...message })
+        return chrome.tabs.sendMessage(activeTab.id!, { ...message, action })
       }
     },
 
@@ -119,7 +119,7 @@ const messageHandleMap = <T>() => ({
   /** window 之间 message 事件 */
   window: {
     send: (target: Window, action: T, message?: any) => {
-      target.postMessage({ action, ...message }, '*')
+      target.postMessage({ ...message, action }, '*')
     },
 
     on: (action: T, callback: (event: MessageEvent) => void) => {
