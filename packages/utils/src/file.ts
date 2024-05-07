@@ -2,13 +2,13 @@ import { dom } from './dom'
 
 const textEncoder = new TextEncoder()
 
-/** 
+/**
  * 获取内容占用磁盘空间大小
- * 
+ *
  * @param content - 需要获取字节大小的文本内容
- * 
+ *
  * @returns 返回以 MB 为单位的数字
- * 
+ *
  * @example
  * ```
  * console.log(`${getStorageSize('hello')} MB`)
@@ -73,11 +73,14 @@ export const getFileData = (
  * ```
  */
 export const downloadContent = (
-  content: string,
+  content: string | Blob,
   fileName: string,
   type?: 'application/json' | 'text/plain' | string
 ) => {
-  const blob = new Blob([content], { type: type || 'application/json' })
+  const blob =
+    typeof content === 'string'
+      ? new Blob([content], { type: type || 'application/json' })
+      : content
   const url = URL.createObjectURL(blob)
 
   dom.create('a', { download: fileName, href: url }).click()

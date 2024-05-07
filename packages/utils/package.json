@@ -1,6 +1,6 @@
 {
   "name": "@vorker/utils",
-  "version": "0.0.13",
+  "version": "0.0.14",
   "description": "",
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
